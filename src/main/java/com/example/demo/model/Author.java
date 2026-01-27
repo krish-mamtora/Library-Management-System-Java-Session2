@@ -1,33 +1,38 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Fetch;
+import java.util.HashSet;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity()
-@Table(name="Author")
+@Table(name = "authors")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
 
-    @OneToMany(mappedBy = "Author", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-    private List<Book> boks = new ArrayList<>();
+    private String name;
+    @ManyToMany
+    @JoinTable(
+            name = "author_books",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private Set<Book> books = new HashSet<>();
 
     public Author(){
 
     }
-    public Author(long id , String name, List<Book> boks) {
-        this.id = id;
-        this.name = name;
-        this.boks = boks;
-    }
-    public long getId(){
+
+    public long getId() {
         return id;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -36,11 +41,11 @@ public class Author {
         this.name = name;
     }
 
-    public List<Book> getBoks() {
-        return boks;
+    public Set<Book> getBooks() {
+        return books;
     }
 
-    public void setBoks(List<Book> boks) {
-        this.boks = boks;
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 }

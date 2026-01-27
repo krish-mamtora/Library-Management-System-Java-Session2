@@ -1,13 +1,12 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Fetch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity()
-@Table(name="Library")
+@Table(name = "libraries")
 public class Library {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
