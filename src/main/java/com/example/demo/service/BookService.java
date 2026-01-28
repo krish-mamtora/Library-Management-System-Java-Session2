@@ -1,9 +1,14 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.BookDTO;
 import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.awt.print.Pageable;
 import java.util.Optional;
 
 import java.util.List;
@@ -14,8 +19,8 @@ public class BookService {
     @Autowired
     BookRepository bookRepository;
 
-    public List<Book> getAllBooks(){
-        return bookRepository.findAll();
+    public List<Book> getAllBooks(Pageable pageable){
+        return bookRepository.findAll((Sort) pageable);
     }
     public Optional<Book> getBookById(Long id){
         return bookRepository.findById(id);
@@ -35,5 +40,9 @@ public class BookService {
     }
     public void deleteBook(Long id){
         bookRepository.deleteById(id);
+    }
+
+    public List<Book> findYearWiseBooks(int pubYear){
+        return bookRepository.findYearWiseBooks(pubYear);
     }
 }

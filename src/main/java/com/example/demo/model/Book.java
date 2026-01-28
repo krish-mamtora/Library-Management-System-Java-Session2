@@ -14,7 +14,7 @@ public class Book {
     private String title;
     private String ISBN;
     private int publishYear;
-
+    private Boolean available;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="library_id")
@@ -26,6 +26,14 @@ public class Book {
 
     public Book(){
 
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public long getId() {

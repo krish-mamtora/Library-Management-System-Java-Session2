@@ -8,10 +8,11 @@ public class AuthorBook {
 
     @EmbeddedId
     private AuthorBookId id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("authorId")
     @JoinColumn(name = "author_id")
-    private Author auther;
+    private Author author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("bookId")
@@ -22,7 +23,7 @@ public class AuthorBook {
 
     }
     AuthorBook(Book book , Author author){
-        this.auther = author;
+        this.author = author;
         this.book= book;
         this.id = new AuthorBookId(book.getId() , author.getId());
     }

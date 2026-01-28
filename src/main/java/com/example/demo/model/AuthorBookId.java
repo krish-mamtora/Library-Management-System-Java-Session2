@@ -2,11 +2,18 @@ package com.example.demo.model;
 
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
 
 @Embeddable
-public class AuthorBookId implements Serializable {
+public class AuthorBookId {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private  Long authorId;
     private  Long bookId;

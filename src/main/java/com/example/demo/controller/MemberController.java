@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.MemberDTO;
 import com.example.demo.model.Member;
 import com.example.demo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -16,13 +14,17 @@ public class MemberController {
     private MemberService memberService;
 
     @PostMapping
-    public void createMember(@RequestBody MemberDTO dto){
-        Member member  = memberService.CreateMember(dto);
+    public void createMember(@RequestBody Member member){
+        memberService.addMember(member);
         System.out.println("Member Added");
     }
-
     @GetMapping
-    public Set<Member> getAllMembers(){
-        return memberService.getAllMembers();
+    public List<Member> getAllMembers(){
+        return memberService.getMembers();
     }
+    @GetMapping("/{id}")
+    public Member getMember(Long id){
+        return memberService.getMemberById(id);
+    }
+
 }

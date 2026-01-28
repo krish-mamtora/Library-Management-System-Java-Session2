@@ -13,15 +13,21 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private String name;
+
     private String email;
     private LocalDate membershipStartDate;
     private List<BorrowRecord> borrowRecords = new ArrayList<>();
+    
     @OneToOne(mappedBy = "member" , cascade = CascadeType.ALL)
     private MemberProfile profile;
+
     public Long getId() {
+
         return id;
     }
+    public  Member(){
 
+    }
     public Member(Long id, String name, String email, LocalDate membershipStartDate, List<BorrowRecord> borrowRecords, MemberProfile profile) {
         this.id = id;
         this.name = name;
