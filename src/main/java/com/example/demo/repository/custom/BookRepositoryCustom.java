@@ -5,5 +5,7 @@ import com.example.demo.model.Book;
 import java.util.List;
 
 public interface BookRepositoryCustom {
-    List<Book> findBooksWithAvailability(String title , Boolean available);
+    default List<Book> findBooksWithAvailability(String title, Boolean available) {
+        return null;
+    }
 }

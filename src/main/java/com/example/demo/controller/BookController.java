@@ -6,9 +6,7 @@ import com.example.demo.service.BookService;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
@@ -23,21 +21,21 @@ public class BookController {
     BookService bookService;
 
     @GetMapping
-    public List<Book> getBooks(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortDir) {
-
-        Sort sort = sortDir.equalsIgnoreCase("asc") ?
-                Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-        Pageable pageable = (Pageable) PageRequest.of(page, size, sort);
-        return bookService.getAllBooks(pageable);
+    public List<Book> getBooks(){
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "5") int size,
+//            @RequestParam(defaultValue = "id") String sortBy,
+//            @RequestParam(defaultValue = "asc") String sortDir) {
+//
+//        Sort sort = sortDir.equalsIgnoreCase("asc") ?
+//                Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+//        Pageable pageable = (Pageable) PageRequest.of(page, size, sort);
+        return bookService.getAllBooks();
     }
 
 
     @GetMapping("/{id}")
-    public Optional<Book> getBookById(@PathVariable Long id){
+    public BookDTO getBookById(@PathVariable Long id){
         return bookService.getBookById(id);
     }
 
@@ -52,7 +50,7 @@ public class BookController {
     }
 
     @GetMapping("/year/{year}")
-    public Optional<Book> findYearWiseBooks(@PathVariable int year){
+    public List<Book> findYearWiseBooks(@PathVariable int year){
         return bookService.findYearWiseBooks(year);
     }
 }

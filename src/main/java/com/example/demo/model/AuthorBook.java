@@ -22,10 +22,33 @@ public class AuthorBook {
     public AuthorBook(){
 
     }
-    AuthorBook(Book book , Author author){
+    public AuthorBook( Author author , Book book){
         this.author = author;
         this.book= book;
-        this.id = new AuthorBookId(book.getId() , author.getId());
+        this.id = new AuthorBookId( author.getId() , book.getId());
     }
 
+    public AuthorBookId getId() {
+        return id;
+    }
+
+    public void setId(AuthorBookId id) {
+        this.id = id;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 }

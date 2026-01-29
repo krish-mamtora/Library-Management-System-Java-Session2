@@ -11,9 +11,6 @@ import java.io.Serializable;
 @Embeddable
 public class AuthorBookId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private  Long authorId;
     private  Long bookId;

@@ -20,13 +20,20 @@ public class Book {
     @JoinColumn(name="library_id")
     private Library library;
 
-
     @ManyToMany(mappedBy = "books")
     private Set<Author> author = new HashSet<>();
 
     public Book(){
 
     }
+
+    public Book(long id, String title, String ISBN, int publishYear) {
+        this.id = id;
+        this.title = title;
+        this.ISBN = ISBN;
+        this.publishYear = publishYear;
+    }
+
 
     public Boolean getAvailable() {
         return available;

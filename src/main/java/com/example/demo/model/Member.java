@@ -16,7 +16,7 @@ public class Member {
 
     private String email;
     private LocalDate membershipStartDate;
-    private List<BorrowRecord> borrowRecords = new ArrayList<>();
+//    private List<BorrowRecord> borrowRecords = new ArrayList<>();
     
     @OneToOne(mappedBy = "member" , cascade = CascadeType.ALL)
     private MemberProfile profile;
@@ -28,12 +28,13 @@ public class Member {
     public  Member(){
 
     }
-    public Member(Long id, String name, String email, LocalDate membershipStartDate, List<BorrowRecord> borrowRecords, MemberProfile profile) {
+    //List<BorrowRecord> borrowRecords,
+    public Member(Long id, String name, String email, LocalDate membershipStartDate, MemberProfile profile) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.membershipStartDate = membershipStartDate;
-        this.borrowRecords = borrowRecords;
+//        this.borrowRecords = borrowRecords;
         this.profile = profile;
     }
 

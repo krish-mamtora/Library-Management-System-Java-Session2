@@ -12,14 +12,14 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> , BookRepositoryCustom {
     List<Book> findByLibraryId(Long libraryId);
 
-    @Query("SELECT b FROM Book b WHERE b.available = true")
+    @Query("select b from Book b where b.available = true")
     List<Book> findAvailableBooks();
 
-    @Query("SELECT br.book FROM BorrowRecord br WHERE br.member.id = :memberId")
+    @Query("select b from BorrowRecord b where b.member.id = :memberId")
     List<Book> findBookBorrowByMember(@Param("memberId") Long memberId);
 
-    @Query(value = "SELECT * FROM books WHERE publishYear = :publishYear", nativeQuery = true)
-    List<Book> findYearWiseBooks(@Param("publishYear") int pubYear);
+    @Query(value = "select * from books where publishYear = :publishYear", nativeQuery = true)
+    List<Book> findYearWiseBooks(@Param("publishYear") int publishYear);
 
-//    List<Book> findAllBypubYear(String pubYear, Pageable pageable);
+//    List<Book> findAllBypubYear(String publishYear, Pageable pageable);
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface BorrowRecordRepository extends JpaRepository<BorrowRecord , Long> {
     @Query(
-            value = "SELECT b. FROM borrow_record br JOIN member m ON br.member_id = m.id JOIN book b ON br.book_id = b.id WHERE m.name = :memberName",
+            value = "",
             nativeQuery = true
     )
     List<Book> findBooksBorrowedByMemberName(@Param("memberName") String memberName);

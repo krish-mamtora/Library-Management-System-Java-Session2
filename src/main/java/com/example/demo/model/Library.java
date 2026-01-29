@@ -17,7 +17,8 @@ public class Library {
     @OneToMany(mappedBy = "library", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private List<Book> boks = new ArrayList<>();
 
-    public Library(){
+    public Library()
+    {
 
     }
     public Library(long id , String name, String location, List<Book> boks) {
@@ -26,9 +27,15 @@ public class Library {
         this.location = location;
         this.boks = boks;
     }
-    public long getId(){
+
+    public long getId() {
         return id;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

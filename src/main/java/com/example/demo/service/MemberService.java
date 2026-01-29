@@ -13,9 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class MemberService  {
-    List<Member> allMembers = new ArrayList<>(Arrays.asList(
-            new Member(10, "Laptop",99) ,
-            new Member(11, "Mobile",400)));
+    List<Member> allMembers = new ArrayList<>();
+
     @Autowired
     private MemberRepository memberRepository;
 
