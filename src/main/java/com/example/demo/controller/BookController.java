@@ -21,7 +21,7 @@ public class BookController {
     BookService bookService;
 
     @GetMapping
-    public List<Book> getBooks(){
+    public List<BookDTO> getBooks(){
 //            @RequestParam(defaultValue = "0") int page,
 //            @RequestParam(defaultValue = "5") int size,
 //            @RequestParam(defaultValue = "id") String sortBy,
@@ -40,8 +40,8 @@ public class BookController {
     }
 
     @PostMapping
-    public void addBook(@RequestBody Book book){
-         bookService.addBook(book);
+    public void addBook(@RequestBody BookDTO dto){
+         bookService.createBook(dto);
     }
 
     @DeleteMapping

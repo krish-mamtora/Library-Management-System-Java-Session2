@@ -15,11 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.awt.print.Pageable;
-import java.util.HashSet;
-import java.util.Optional;
-
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class BookService {
@@ -54,10 +50,28 @@ public class BookService {
         }
         book.setAuthor(authors);
         bookRepository.save(book);
+//        return book;
     }
 
-    public List<Book> getAllBooks(){
-        return bookRepository.findAll();
+    public List<BookDTO> getAllBooks(){
+//        return bookRepository.findAll();
+        List<Book> books = bookRepository.findAll();
+        List<BookDTO>dtoList = new ArrayList<>();
+        for(Book book : books){
+            BookDTO dto = new BookDTO();
+            dto.setId(book.getId());
+            dto.setTitle(book.getTitle());
+            dto.setPublishYear(book.getPublishYear());
+            dto.setISBN(book.getISBN());
+            dto.setAvailable(book.getAvailable());
+            Set<Long> authorIds = new HashSet<>();
+            for(Author author : book.getAuthor()){
+                authorIds.add(author.getId());
+            }
+            dto.setAuthorIds(authorIds);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
     public BookDTO getBookById(@PathVariable Long id){
         Book book = bookRepository.findById(id).orElseThrow(()->new RuntimeException("book not found"));
