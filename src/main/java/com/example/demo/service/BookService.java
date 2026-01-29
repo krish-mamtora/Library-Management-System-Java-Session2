@@ -7,6 +7,7 @@ import com.example.demo.model.Library;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LibraryRepository;
+import com.example.demo.repository.custom.BookRepositoryCustomImp;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.awt.print.Pageable;
 import java.util.*;
 
+//import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyles.title;
+
 @Service
 public class BookService {
 
@@ -24,7 +27,8 @@ public class BookService {
     private BookRepository bookRepository;
     @Autowired
     private AuthorBookService authorBookService;
-
+    @Autowired
+    private BookRepositoryCustomImp bookRepositoryCustomImp;
     @Autowired
     private LibraryRepository libraryRepository;
     @Autowired
@@ -72,6 +76,9 @@ public class BookService {
             dtoList.add(dto);
         }
         return dtoList;
+    }
+    public List<Book> findBooksWithAvailability(String title , Boolean available){
+        return bookRepositoryCustomImp.findBooksWithAvailability(title ,  available);
     }
     public BookDTO getBookById(@PathVariable Long id){
         Book book = bookRepository.findById(id).orElseThrow(()->new RuntimeException("book not found"));

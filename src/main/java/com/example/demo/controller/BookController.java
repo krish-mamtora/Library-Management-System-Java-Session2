@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Positive;
 import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
@@ -35,7 +37,7 @@ public class BookController {
 
 
     @GetMapping("/{id}")
-    public BookDTO getBookById(@PathVariable Long id){
+    public BookDTO getBookById(@PathVariable  @Positive  Long id){
         return bookService.getBookById(id);
     }
 
@@ -43,7 +45,10 @@ public class BookController {
     public void addBook(@RequestBody BookDTO dto){
          bookService.createBook(dto);
     }
-
+    @GetMapping("/available/{title}/{available}")
+    public List<Book> getAvailableBooks(@PathVariable String title ,@PathVariable Boolean  available){
+        return bookService.findBooksWithAvailability(title , available);
+    }
     @DeleteMapping
     public void deleteBook(@PathVariable @Positive Long id){
         bookService.deleteBook(id);
