@@ -16,7 +16,7 @@ public class LibraryController {
 
     @PostMapping
     public void createLinrary(@RequestBody LibraryDTO libraryDTO){
-            libraryService.createLibrary(libraryDTO);
+        libraryService.createLibrary(libraryDTO);
     }
     @GetMapping("/{id}")
     public LibraryDTO getLibrary(@PathVariable long id ){
