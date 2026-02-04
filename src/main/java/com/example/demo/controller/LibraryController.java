@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/library")
 public class LibraryController {
-    @Autowired
-    private LibraryService libraryService;
 
+    private final LibraryService libraryService;
+    public LibraryController(LibraryService libraryService){
+        this.libraryService = libraryService;
+    }
     @PostMapping
     public void createLinrary(@RequestBody LibraryDTO libraryDTO){
         libraryService.createLibrary(libraryDTO);
@@ -26,6 +29,7 @@ public class LibraryController {
     List<LibraryDTO> getALLibrary(){
         return libraryService.getAllLibrary();
     }
+
     @PutMapping("/{id}")
     public void updateLibrary(@PathVariable long id , @RequestBody LibraryDTO dto){
         libraryService.updateLibrary(id , dto);
